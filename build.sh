@@ -35,11 +35,11 @@ for baseimage in debian:wheezy debian:stretch debian:buster alpine:3.8; do
 done
 
 # Windows (x64)
-if [ $PLATFORM = "all" ] || [ $PLATFORM = "win32-x64" ]; then
-  echo "Building win32-x64..."
-  docker build -t vips-dev-win32-x64 win32-x64
-  docker run --rm -e "VERSION_VIPS=${VERSION_VIPS}" -v $PWD:/packaging vips-dev-win32-x64 sh -c "/packaging/build/win.sh"
-fi
+# if [ $PLATFORM = "all" ] || [ $PLATFORM = "win32-x64" ]; then
+#   echo "Building win32-x64..."
+#   docker build -t vips-dev-win32-x64 win32-x64
+#   docker run --rm -e "VERSION_VIPS=${VERSION_VIPS}" -v $PWD:/packaging vips-dev-win32-x64 sh -c "/packaging/build/win.sh"
+# fi
 
 # Linux (x64, ARMv6, ARMv7, ARMv8)
 for flavour in linux-x64 linuxmusl-x64 linux-armv6 linux-armv7 linux-armv8; do

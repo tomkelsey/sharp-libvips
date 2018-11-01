@@ -33,7 +33,7 @@ VERSION_GDKPIXBUF=2.36.12
 VERSION_FREETYPE=2.9.1
 VERSION_EXPAT=2.2.6
 VERSION_FONTCONFIG=2.12.6
-VERSION_HARFBUZZ=2.0.2
+VERSION_HARFBUZZ=2.1.0
 VERSION_PIXMAN=0.34.0
 VERSION_CAIRO=1.15.12
 VERSION_FRIBIDI=1.0.5
@@ -41,6 +41,7 @@ VERSION_PANGO=1.42.4
 VERSION_CROCO=0.6.12
 VERSION_SVG=2.44.6
 VERSION_GIF=5.1.4
+VERSION_MOZJPEG=3.3.1
 
 # Least out-of-sync Sourceforge mirror
 SOURCEFORGE_BASE_URL=https://netix.dl.sourceforge.net/project/
@@ -146,6 +147,13 @@ mkdir ${DEPS}/lcms2
 curl -Ls ${SOURCEFORGE_BASE_URL}lcms/lcms/${VERSION_LCMS2}/lcms2-${VERSION_LCMS2}.tar.gz | tar xzC ${DEPS}/lcms2 --strip-components=1
 cd ${DEPS}/lcms2
 ./configure --host=${CHOST} --prefix=${TARGET} --enable-shared --disable-static --disable-dependency-tracking
+make install-strip
+
+mkdir ${DEPS}/mozjpeg
+curl -Ls https://github.com/mozilla/mozjpeg/archive/v${VERSION_MOZJPEG}.tar.gz | tar xzC ${DEPS}/mozjpeg --strip-components=1
+cd ${DEPS}/mozjpeg
+autoreconf -fiv
+./configure --host=${CHOST} --prefix=${TARGET} --enable-shared --disable-static --disable-dependency-tracking --with-jpeg8
 make install-strip
 
 mkdir ${DEPS}/jpeg
